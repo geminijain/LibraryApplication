@@ -27,6 +27,7 @@ namespace LibraryApp
 
         public Account()
         {
+             AccountNumber = ++lastAccountNumber;
 
         }
 

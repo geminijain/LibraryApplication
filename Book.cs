@@ -8,7 +8,7 @@ namespace LibraryApp
 {
     private static int lastBookId = 101;
 
-    class Book
+    public static class Book
     {
         #region Properties
         public int BookId { get; set; }          // book id 
@@ -24,7 +24,7 @@ namespace LibraryApp
         #endregion
 
         #region Constructor
-
+         
         public Book()
         {
 

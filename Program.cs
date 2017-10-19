@@ -10,21 +10,38 @@ namespace LibraryApp
     {
         static void Main(string[] args)
         {
-            var book = new Book();
-            book.BookId = 101;
-            book.Title = "Cracking the code interview";
-            book.Author = "Gayle Laakmann McDowell";
-            book.PublishedYear = 2008;
-            book.Quantity = 50;
+            Console.WriteLine("************************");
+            Console.WriteLine("Welcome to my Library");
+            Console.WriteLine("***************************");
+            Console.WriteLine("0. Exit");
+            Console.WriteLine("1. Create an account");
+            Console.WriteLine("2. Issue Book");
+            Console.WriteLine("3. Deposit Book");
+            Console.WriteLine("4. Print All issued Books");
 
-            var account =  new Account();           // instantiate an object
-            // account.AccountNumber = 1234;
-            account.EmailAddress = "abc@xyz.com";
-            //account.NumberOfBooksIssued = 20;
+            var choice = Console.ReadLine();
+            switch (choice)
+            {
+            case "0":
+                    return;
 
-            var newBalance = account.Issue(5);
+            case "1":
+                    Console.Write("Email Address: ");
+                    var emailAddress = Console.ReadLine();
+                    var account = Library.CreateAccount(emailAddress);
+                    
+                    break;
 
-            Console.WriteLine($"AN: {account.AccountNumber}, EA: {account.EmailAddress}, Number of Books Issued: {account.NumberOfBooksIssued}");
+            case "2":
+                    break;
+
+            case "3":
+                    break;
+
+            case "4":
+                    break;
+
+            }
         }
 
     }
