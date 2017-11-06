@@ -6,33 +6,35 @@ using System.Threading.Tasks;
 
 namespace LibraryApp
 {
-    private static int lastBookId = 101;
+    /// <summary>
+    /// class implementation of book
+    /// </summary>
 
-    public static class Book
+    public class Book
     {
+        private static int lastBookNumber = 101;
+
         #region Properties
-        public int BookId { get; set; }          // book id 
-
+        public int BookNumber { get; }          // book id 
         public string Title { get; set; }        // book title
-
         public int Quantity { get; set; }        // total number of books 
-
-        public string Author { get; set; } 
-
-        public int PublishedYear { get; set;}
 
         #endregion
 
         #region Constructor
-         
         public Book()
         {
-
+            BookNumber = ++lastBookNumber;
         }
-
-
         #endregion
 
+        #region Method
+        //    public void AddBook(int numberOfBooks)
+        //{
+
+        //}
+
+#endregion
 
     }
 }

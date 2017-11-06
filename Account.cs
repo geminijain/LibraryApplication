@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace LibraryApp
 {
     /// <summary>
-    /// class implementation of lirary account
+    /// class implementation of account
     /// </summary>
-    class Account
+    public class Account
     {
         private static int lastAccountNumber = 0;
 
@@ -18,9 +18,9 @@ namespace LibraryApp
 
         public string EmailAddress { get; set; }            //email address of user
 
-        public int NumberOfBooksIssued { get; private set; }        // number of books issued by library account holder
+        public int NumberOfIssuedBooks { get; private set; }        // number of books issued by library account holder
 
-        public DateTime CreatedDate { get; set; }           //date of account creation
+        public DateTime CreatedDate { get; private set; }           //date of account creation
         #endregion
 
         #region Constructor
@@ -28,7 +28,7 @@ namespace LibraryApp
         public Account()
         {
              AccountNumber = ++lastAccountNumber;
-
+            CreatedDate = DateTime.UtcNow;
         }
 
 
@@ -37,14 +37,14 @@ namespace LibraryApp
 
         public int Issue(int numberOfBooks)
         {
-            NumberOfBooksIssued += numberOfBooks;
-            return NumberOfBooksIssued;
+            NumberOfIssuedBooks += numberOfBooks;
+            return NumberOfIssuedBooks;
         }
 
-        public int Deposit(int numberOfBooks)
+        public void Deposit(int numberOfBooks)
         {
-            NumberOfBooksIssued -= numberOfBooks;
-            return NumberOfBooksIssued;
+            NumberOfIssuedBooks -= numberOfBooks;
+
         }
 
        
