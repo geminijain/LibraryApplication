@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +12,13 @@ namespace LibraryApp
     /// </summary>
     public class Account
     {
-        private static int lastAccountNumber = 0;
-
+       
         #region Properties
-        public int AccountNumber { get; }              //user's library account number 
+        [Key]
+        public int AccountNumber { get; private set; }              //user's library account number 
 
+        [Required]
+        [StringLength(50, ErrorMessage = "Email cannot be more than 50 characters of length")]
         public string EmailAddress { get; set; }            //email address of user
 
         public int NumberOfIssuedBooks { get; private set; }        // number of books issued by library account holder
@@ -27,8 +30,7 @@ namespace LibraryApp
 
         public Account()
         {
-             AccountNumber = ++lastAccountNumber;
-            CreatedDate = DateTime.UtcNow;
+           CreatedDate = DateTime.UtcNow;
         }
 
 

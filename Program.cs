@@ -53,7 +53,7 @@ namespace LibraryApp
                         var books = Library.GetAllBooks();
                         foreach (var item in books)
                         {
-
+                            Console.WriteLine($"Book Number:{item.BookNumber}, Title:{item.Title}, Quantity:{item.Quantity}, Book Added Date:{item.BookAddedOn}");
                         }
                         break;
 

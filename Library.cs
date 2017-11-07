@@ -8,8 +8,7 @@ namespace LibraryApp
 {
     public static class Library
     {
-        private static List<Account> accounts = new List<Account>();
-        private static List<Book> books = new List<Book>();
+        private static LibraryModel db = new LibraryModel();
 
     /// <summary>
     /// Library creates an account for user
@@ -24,10 +23,10 @@ namespace LibraryApp
             var account = new Account
             { EmailAddress = emailAddress
             };
-            accounts.Add(account);
+            db.Accounts.Add(account);
+            db.SaveChanges();
             Console.WriteLine("Account has been created !");
             return account;   
-            
         }
 
         public static Book AddBook(string bookTitle, int bookQuantity)
@@ -35,14 +34,15 @@ namespace LibraryApp
             var book = new Book {
                 Title = bookTitle, 
                 Quantity = bookQuantity };
-            books.Add(book);
-            Console.WriteLine("Book has been added !");
+            db.Books.Add(book);
+            db.SaveChanges();
+            Console.WriteLine("Book has been added to library !");
             return book;
         }
 
         public static List<Book> GetAllBooks()
         {
-            return books;
+            return db.Books.ToList();
         }
 
     }
