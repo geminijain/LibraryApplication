@@ -22,6 +22,7 @@ namespace LibraryApp
         public string Title { get; set; }        // book title
         public int Quantity { get; set; }        // total number of books 
         public DateTime BookAddedOn { get; private set; }
+        public virtual ICollection<Transaction> Transactions{ get; set; }
 
 
         #endregion
@@ -36,6 +37,15 @@ namespace LibraryApp
 
         #region Method
         
+        public void Issue(int numberOfBooks)
+        {
+            numberOfBooks = --numberOfBooks;
+        }
+
+        public void Deposit(int numberOfBooks)
+        {
+            numberOfBooks = ++numberOfBooks;
+        }
         #endregion
 
     }

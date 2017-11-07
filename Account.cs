@@ -24,6 +24,8 @@ namespace LibraryApp
         public int NumberOfIssuedBooks { get; private set; }        // number of books issued by library account holder
 
         public DateTime CreatedDate { get; private set; }           //date of account creation
+
+        public virtual ICollection<Transaction> Transactions{ get; set; }
         #endregion
 
         #region Constructor
@@ -46,7 +48,6 @@ namespace LibraryApp
         public void Deposit(int numberOfBooks)
         {
             NumberOfIssuedBooks -= numberOfBooks;
-
         }
 
        

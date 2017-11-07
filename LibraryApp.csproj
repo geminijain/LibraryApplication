@@ -55,12 +55,46 @@
     <Compile Include="Book.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="LibraryModel.cs" />
+    <Compile Include="Migrations\201711062340154_InitialCreate.cs" />
+    <Compile Include="Migrations\201711062340154_InitialCreate.Designer.cs">
+      <DependentUpon>201711062340154_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711070109085_Transactions.cs" />
+    <Compile Include="Migrations\201711070109085_Transactions.Designer.cs">
+      <DependentUpon>201711070109085_Transactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711070541329_TransactionUpdated.cs" />
+    <Compile Include="Migrations\201711070541329_TransactionUpdated.Designer.cs">
+      <DependentUpon>201711070541329_TransactionUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711070606222_TransactionsUpdated2.cs" />
+    <Compile Include="Migrations\201711070606222_TransactionsUpdated2.Designer.cs">
+      <DependentUpon>201711070606222_TransactionsUpdated2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transaction.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711062340154_InitialCreate.resx">
+      <DependentUpon>201711062340154_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711070109085_Transactions.resx">
+      <DependentUpon>201711070109085_Transactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711070541329_TransactionUpdated.resx">
+      <DependentUpon>201711070541329_TransactionUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711070606222_TransactionsUpdated2.resx">
+      <DependentUpon>201711070606222_TransactionsUpdated2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

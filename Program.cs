@@ -38,15 +38,39 @@ namespace LibraryApp
                         break;
 
                     case "2":
+                        Console.Write("Account Number: ");
+                        var accountNumber = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Book Number: ");
+                        var bookNumber = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Number of Books:");
+                        var quantity = Convert.ToInt32(Console.ReadLine());
+                        Library.Issue(accountNumber, bookNumber, quantity);
+                        Console.WriteLine("Book issued successfully !");
                         break;
-
+                  
                     case "3":
+                        Console.Write("Account Number: ");
+                        accountNumber = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Book Number: ");
+                        bookNumber = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Number of Books:");
+                        quantity = Convert.ToInt32(Console.ReadLine());
+                        Library.Deposit(accountNumber, bookNumber, quantity);
+                        Console.WriteLine("Book deposited successfully !");
                         break;
 
                     case "4":
                         break;
 
                     case "5":
+                        Console.WriteLine("Account Number:");
+                        accountNumber = Convert.ToInt32(Console.ReadLine());
+                        var transactions = Library.GetAllTransactions(accountNumber);
+                        foreach(var tran in transactions)
+                        {
+                            Console.WriteLine($"Id : {tran.TransactionId}, Date: {tran.TransactionDate}, Type: {tran.TypeOfTransaction}");
+                        }
+
                         break;
 
                     case "6":
