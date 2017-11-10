@@ -43,70 +43,110 @@ namespace LibraryApp
             return db.Books.ToList();
         }
 
+        /// <summary>
+        /// Issue book to account
+        /// </summary>
+        /// <param name="accountNumber"></param>
+        /// <param name="bookNumber"></param>
+        /// <param name="quantity"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+
         public static void Issue(int accountNumber, int bookNumber, int quantity)
         {
-            // decrease number of books in library 
-            var book = db.Books.Where(b => b.BookNumber == bookNumber).FirstOrDefault();
-            if (book == null)
-                return;
-            var newQuantity = book.Issue(quantity);
-            book.Quantity = newQuantity;
-                       
-            // increase number of issued books in account
-            var account = db.Accounts.Where(a => a.AccountNumber == accountNumber).FirstOrDefault();
-            if (account == null)
-                return;
-            newQuantity = account.Issue(quantity);
-            account.NumberOfIssuedBooks = newQuantity;
-
-            // update transaction table in database
-            var transaction = new Transaction
+            try
             {
-                TransactionDate = DateTime.UtcNow,
-                TypeOfTransaction = TransactionType.Debit,
-                AccountNumber = accountNumber,
-                BookNumber = bookNumber,
-                NumberOfBooks = quantity
-            };
-            db.Transactions.Add(transaction);
-            db.SaveChanges();
-        }
+                // decrease number of books in library 
+                Book book = GetBookByBookNumber(bookNumber);
 
+                var newQuantity = book.Issue(quantity);
+                book.Quantity = newQuantity;
 
-        public static void Deposit(int accountNumber, int bookNumber, int quantity)
-        {
-            var account = db.Accounts.Where(a => a.AccountNumber == accountNumber).FirstOrDefault();
-            if (account == null)
-                return;
+                // increase number of issued books in account
+                var account = GetAccountByAccountNumber(accountNumber);
 
-            var newQuantity = account.Deposit(quantity);
-            account.NumberOfIssuedBooks = newQuantity;
-            
-            var book = db.Books.Where(b => b.BookNumber == bookNumber).FirstOrDefault();
-            if (book == null)
-                return;
-            newQuantity = book.Deposit(quantity);                
-            book.Quantity = newQuantity;                        //assign updated number of books 
+                newQuantity = account.Issue(quantity);
+                account.NumberOfIssuedBooks = newQuantity;
 
-
-            var transaction = new Transaction
-            {
-                TransactionDate = DateTime.UtcNow,
-                TypeOfTransaction = TransactionType.Credit,
-                NumberOfBooks = quantity,
-                AccountNumber = account.AccountNumber,
-                BookNumber = book.BookNumber
-            };
+                // update transaction table in database
+                var transaction = new Transaction
+                {
+                    TransactionDate = DateTime.UtcNow,
+                    TypeOfTransaction = TransactionType.Debit,
+                    AccountNumber = accountNumber,
+                    BookNumber = bookNumber,
+                    NumberOfBooks = quantity
+                };
                 db.Transactions.Add(transaction);
                 db.SaveChanges();
-            
+            }
+            catch
+            {
+                //Log
+                throw;
+            }
         }
 
+      /// <summary>
+      /// Deposit book into account
+      /// </summary>
+      /// <param name="accountNumber"></param>
+      /// <param name="bookNumber"></param>
+      /// <param name="quantity"></param>
+      /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public static void Deposit(int accountNumber, int bookNumber, int quantity)
+        {
+            try
+            {
+                var account = GetAccountByAccountNumber(accountNumber);
 
-             
+                var newQuantity = account.Deposit(quantity);
+                account.NumberOfIssuedBooks = newQuantity;
+
+                Book book = GetBookByBookNumber(bookNumber);
+
+                newQuantity = book.Deposit(quantity);
+                book.Quantity = newQuantity;                        //assign updated number of books 
+
+
+                var transaction = new Transaction
+                {
+                    TransactionDate = DateTime.UtcNow,
+                    TypeOfTransaction = TransactionType.Credit,
+                    NumberOfBooks = quantity,
+                    AccountNumber = accountNumber,
+                    BookNumber = bookNumber
+                };
+                db.Transactions.Add(transaction);
+                db.SaveChanges();
+            }
+            catch
+            {
+                //Log
+                throw;
+            }
+        }
+
+        
         public static List<Transaction> GetAllTransactions(int accountNumber)
         {
             return db.Transactions.Where(t => t.AccountNumber == accountNumber).OrderByDescending(t => t.TransactionDate).ToList();
+        }
+
+
+        private static Book GetBookByBookNumber(int bookNumber)
+        {
+            var book = db.Books.Where(b => b.BookNumber == bookNumber).FirstOrDefault();
+            if (book == null)
+                throw new ArgumentOutOfRangeException("Invalid account number");
+            return book;
+        }
+
+        public static Account GetAccountByAccountNumber(int accountNumber)
+        {
+            var account = db.Accounts.Where(a => a.AccountNumber == accountNumber).FirstOrDefault();
+            if (account == null)
+                throw new ArgumentOutOfRangeException("Invalid account number");
+            return account;
         }
     }
 }

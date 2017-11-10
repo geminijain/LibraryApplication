@@ -49,6 +49,9 @@ namespace LibraryApp
         // issuing book means decreasing numberOfBook in account table
         public int Deposit(int numberOfBooks)
         {
+            if (numberOfBooks > NumberOfIssuedBooks)
+                throw new ArgumentOutOfRangeException("numberOfBooks","Number of books to deposit cannot exceed than number of issued books");
+
             NumberOfIssuedBooks = NumberOfIssuedBooks - numberOfBooks;
             return NumberOfIssuedBooks;
         }

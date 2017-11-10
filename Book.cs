@@ -40,6 +40,8 @@ namespace LibraryApp
         // issuing book means decreasing number of book in book table
         public int Issue(int numberOfBooks)
         {
+            if (numberOfBooks > Quantity)
+               throw new ArgumentOutOfRangeException("numberOfBooks", "Insufficient books");
             Quantity =  Quantity - numberOfBooks;
             return Quantity;
         }

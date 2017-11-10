@@ -38,25 +38,64 @@ namespace LibraryApp
                         break;
 
                     case "2":
-                        Console.Write("Account Number: ");
-                        var accountNumber = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Book Number: ");
-                        var bookNumber = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Number of Books:");
-                        var quantity = Convert.ToInt32(Console.ReadLine());
-                        Library.Issue(accountNumber, bookNumber, quantity);
-                        Console.WriteLine("Book issued successfully !");
+                        try
+                        {
+                            Console.Write("Account Number: ");
+                            var aNumber = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Book Number: ");
+                            var bookNumber = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Number of Books:");
+                            var quantity = Convert.ToInt32(Console.ReadLine());
+                            Library.Issue(aNumber, bookNumber, quantity);
+                            Console.WriteLine("Book issued successfully !");
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Either the account number or book number or number of books is invalid");
+                        }
+                        catch (OverflowException)
+                        {
+                            Console.WriteLine("Either the account number or book number or number of books is beyond the range");
+                        }
+                        catch (ArgumentOutOfRangeException ax)
+                        {
+                            Console.WriteLine(ax.Message);
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Oops! Try again!");
+                        }
                         break;
                   
                     case "3":
-                        Console.Write("Account Number: ");
-                        accountNumber = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Book Number: ");
-                        bookNumber = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Number of Books:");
-                        quantity = Convert.ToInt32(Console.ReadLine());
-                        Library.Deposit(accountNumber, bookNumber, quantity);
-                        Console.WriteLine("Book deposited successfully !");
+                        try
+                        {
+                            Console.Write("Account Number: ");
+                            var aNumber = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Book Number: ");
+                            var bookNumber = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Number of Books:");
+                            var quantity = Convert.ToInt32(Console.ReadLine());
+                            Library.Deposit(aNumber, bookNumber, quantity);
+                            Console.WriteLine("Book deposited successfully !");
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Either the account number or book number or number of books is invalid");
+                        }
+                        catch (OverflowException)
+                        {
+                            Console.WriteLine("Either the account number or book number or number of books is beyond the range");
+                        }
+                        catch (ArgumentOutOfRangeException ax)
+                        {
+                            Console.WriteLine(ax.Message);                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Oops! Try again!");
+                        }
+
+
                         break;
 
                     case "4":
@@ -64,7 +103,7 @@ namespace LibraryApp
 
                     case "5":
                         Console.WriteLine("Account Number:");
-                        accountNumber = Convert.ToInt32(Console.ReadLine());
+                        var accountNumber = Convert.ToInt32(Console.ReadLine());
                         var transactions = Library.GetAllTransactions(accountNumber);
                         foreach(var tran in transactions)
                         {
