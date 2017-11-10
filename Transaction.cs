@@ -10,8 +10,8 @@ namespace LibraryApp
 {
     public enum TransactionType
     {
-        Issue,
-        Return
+        Credit,
+        Debit
     }
     public class Transaction
     {

@@ -15,13 +15,13 @@ namespace LibraryApp
        
         #region Properties
         [Key]
-        public int AccountNumber { get; private set; }              //user's library account number 
+        public int AccountNumber { get; set; }              //user's library account number 
 
         [Required]
         [StringLength(50, ErrorMessage = "Email cannot be more than 50 characters of length")]
         public string EmailAddress { get; set; }            //email address of user
 
-        public int NumberOfIssuedBooks { get; private set; }        // number of books issued by library account holder
+        public int NumberOfIssuedBooks { get; set; }        // number of books issued by library account holder
 
         public DateTime CreatedDate { get; private set; }           //date of account creation
 
@@ -39,15 +39,18 @@ namespace LibraryApp
         #endregion
         #region Methods
 
+        // issuing book means increasing numberOfIssuedBook in account table
         public int Issue(int numberOfBooks)
         {
             NumberOfIssuedBooks += numberOfBooks;
-            return NumberOfIssuedBooks;
+            return numberOfBooks;
         }
 
-        public void Deposit(int numberOfBooks)
+        // issuing book means decreasing numberOfBook in account table
+        public int Deposit(int numberOfBooks)
         {
-            NumberOfIssuedBooks -= numberOfBooks;
+            NumberOfIssuedBooks = NumberOfIssuedBooks - numberOfBooks;
+            return NumberOfIssuedBooks;
         }
 
        

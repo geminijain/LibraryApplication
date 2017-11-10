@@ -37,14 +37,18 @@ namespace LibraryApp
 
         #region Method
         
-        public void Issue(int numberOfBooks)
+        // issuing book means decreasing number of book in book table
+        public int Issue(int numberOfBooks)
         {
-            numberOfBooks = --numberOfBooks;
+            Quantity =  Quantity - numberOfBooks;
+            return Quantity;
         }
 
-        public void Deposit(int numberOfBooks)
+        //deposit book means increasing number of books in book table
+        public int Deposit(int numberOfBooks)
         {
-            numberOfBooks = ++numberOfBooks;
+            Quantity = Quantity + numberOfBooks;
+            return Quantity;
         }
         #endregion
 

@@ -68,7 +68,7 @@ namespace LibraryApp
                         var transactions = Library.GetAllTransactions(accountNumber);
                         foreach(var tran in transactions)
                         {
-                            Console.WriteLine($"Id : {tran.TransactionId}, Date: {tran.TransactionDate}, Type: {tran.TypeOfTransaction}");
+                            Console.WriteLine($"Id : {tran.TransactionId}, Date: {tran.TransactionDate}, Type: {tran.TypeOfTransaction}, Account Number :{tran.AccountNumber}, Book Number: {tran.BookNumber}");
                         }
 
                         break;
