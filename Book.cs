@@ -15,13 +15,13 @@ namespace LibraryApp
     {
         #region Properties
         [Key]
-        public int BookNumber { get; private set; }          // book id 
+        public int BookNumber { get; set; }          // book id 
 
         [Required]
         [StringLength(50,ErrorMessage ="Title cannot be more than 50 characters of length")]
         public string Title { get; set; }        // book title
         public int Quantity { get; set; }        // total number of books 
-        public DateTime BookAddedOn { get; private set; }
+        public DateTime BookAddedOn { get; set; }
         public virtual ICollection<Transaction> Transactions{ get; set; }
 
 

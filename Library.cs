@@ -15,11 +15,12 @@ namespace LibraryApp
         /// </summary>
         /// <param name="emailAddress">Email address of the account</param> 
         /// <returns>return new account</returns>
-   
+
         public static Account CreateAccount(string emailAddress)
         {
             var account = new Account
-            { EmailAddress = emailAddress
+            {
+                EmailAddress = emailAddress
             };
             db.Accounts.Add(account);
             db.SaveChanges();
@@ -29,9 +30,11 @@ namespace LibraryApp
 
         public static Book AddBook(string bookTitle, int bookQuantity)
         {
-            var book = new Book {
+            var book = new Book
+            {
                 Title = bookTitle,
-                Quantity = bookQuantity };
+                Quantity = bookQuantity
+            };
             db.Books.Add(book);
             db.SaveChanges();
             Console.WriteLine("Book has been added to library !");
@@ -86,13 +89,13 @@ namespace LibraryApp
             }
         }
 
-      /// <summary>
-      /// Deposit book into account
-      /// </summary>
-      /// <param name="accountNumber"></param>
-      /// <param name="bookNumber"></param>
-      /// <param name="quantity"></param>
-      /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <summary>
+        /// Deposit book into account
+        /// </summary>
+        /// <param name="accountNumber"></param>
+        /// <param name="bookNumber"></param>
+        /// <param name="quantity"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static void Deposit(int accountNumber, int bookNumber, int quantity)
         {
             try
@@ -126,14 +129,25 @@ namespace LibraryApp
             }
         }
 
-        
+        public static void EditBook(Book book)
+        {
+            var oldBook = GetBookByBookNumber(book.BookNumber);
+            db.Entry(oldBook).State = System.Data.Entity.EntityState.Modified;
+            oldBook.Title = book.Title;
+            db.SaveChanges();
+        }
+               
         public static List<Transaction> GetAllTransactions(int accountNumber)
         {
             return db.Transactions.Where(t => t.AccountNumber == accountNumber).OrderByDescending(t => t.TransactionDate).ToList();
         }
 
-
-        private static Book GetBookByBookNumber(int bookNumber)
+        //// how to get all issued books from books class
+        //public static List<Transaction> GetAllIssuedBooks(int accountNumber)
+        //{
+        //    return null;
+        //}
+        public static Book GetBookByBookNumber(int bookNumber)
         {
             var book = db.Books.Where(b => b.BookNumber == bookNumber).FirstOrDefault();
             if (book == null)
@@ -148,6 +162,13 @@ namespace LibraryApp
                 throw new ArgumentOutOfRangeException("Invalid account number");
             return account;
         }
+
+        public static List<Account> GetAllAccounts(string emailAddress)
+        {
+            return db.Accounts.Where(a => a.EmailAddress == emailAddress).ToList();
+        }
+
+        
     }
 }
 
