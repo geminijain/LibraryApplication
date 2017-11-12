@@ -1,0 +1,46 @@
+﻿@model IEnumerable<LibraryApp.Account>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfIssuedBooks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfIssuedBooks)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AccountNumber }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AccountNumber }) |
+            @Html.ActionLink("Issue", "Issue", new { id=item.AccountNumber })|
+            @Html.ActionLink("Deposit", "Deposit", new { id = item.AccountNumber })|
+        </td>
+    </tr>
+}
+
+</table>
